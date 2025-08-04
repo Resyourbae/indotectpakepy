@@ -1,25 +1,64 @@
-{% extends 'base.html' %}
-{% block title %}Register | Indotect{% endblock %}
-{% block content %}
-<div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
-    <h2 class="text-2xl font-bold text-center mb-2">Register</h2>
-    <p class="text-sm text-center text-gray-500 mb-4">Buat akun baru Anda di Indotect</p>
-    <form method="POST" action="{{ url_for('register') }}" class="space-y-4">
-        {{ form.hidden_tag() }}
-        <div>
-            <label for="username" class="block text-sm font-medium text-gray-900">Username</label>
-            {{ form.username(class_="mt-1 block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500") }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-white min-h-screen flex flex-col">
+    <!-- Navbar Start -->
+    <nav class="bg-black text-white py-3 shadow-md">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <a href="/" class="text-xl font-medium pl-4 py-1 font-family">INDOTHECTSA</a>
+            <div class="space-x-4">
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('profile') }}" class="hover:underline">Profile</a>
+                    <a href="{{ url_for('logout') }}" class="hover:underline">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="hover:underline">Login</a>
+                    <a href="{{ url_for('register') }}" class="hover:underline">Register</a>
+                {% endif %}
+            </div>
         </div>
-        <div>
-            <label for="email" class="block text-sm font-medium text-gray-900">Email</label>
-            {{ form.email(class_="mt-1 block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500") }}
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="container mx-auto mt-4 px-4">
+                    <div class="p-3 rounded-lg text-white {{ 'bg-red-600' if category=='danger' else 'bg-green-600' }}">
+                        {{ message }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="flex-1 flex items-center justify-center">
+        <div class="w-full max-w-md p-5 space-y-3 bg-white rounded-lg border">
+            <h2 class="text-2xl text-center text-gray-800">Register</h2>
+            <h2 class="text-sm text-center text-gray-500">Buat akun baru Anda di Indotect</h2>
+            <form method="POST" action="{{ url_for('register') }}" class="space-y-4 rounded-md p-2">
+                {{ form.hidden_tag() }}
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-900">Username</label>
+                    {{ form.username(class_="mt-1 block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black", placeholder="Masukkan username Anda") }}
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-900">Email</label>
+                    {{ form.email(class_="mt-1 block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black", placeholder="Masukkan email Anda") }}
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-900">Password</label>
+                    {{ form.password(class_="mt-1 block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black", placeholder="Masukkan password Anda") }}
+                </div>
+                <button type="submit" class="w-full py-2 px-4 bg-black text-white font-semibold text-sm rounded-md hover:bg-gray-800">Register</button>
+            </form>
+            <p class="text-center text-sm text-gray-600">Sudah punya akun? <a href="{{ url_for('login') }}" class="text-black font-semibold hover:underline">Login disini</a></p>
         </div>
-        <div>
-            <label for="password" class="block text-sm font-medium text-gray-900">Password</label>
-            {{ form.password(class_="mt-1 block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500") }}
-        </div>
-        <button type="submit" class="w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold">Register</button>
-    </form>
-    <p class="mt-4 text-center text-sm">Sudah punya akun? <a href="{{ url_for('login') }}" class="text-indigo-600 hover:underline">Login</a></p>
-</div>
-{% endblock %}
+    </div>
+</body>
+</html>

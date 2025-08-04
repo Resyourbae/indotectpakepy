@@ -1,12 +1,8 @@
 
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
-import os
-from pathlib import Path
+from app import app
 
-# Dapatkan path absolut ke direktori aplikasi
-basedir = os.path.abspath(os.path.dirname(__file__))
+if __name__ == '__main__':
+    app.run(debug=True)
 
 # Inisialisasi aplikasi Flask
 app = Flask(__name__, 
