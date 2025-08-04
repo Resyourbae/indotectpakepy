@@ -17,4 +17,6 @@ class LoginForm(FlaskForm):
 class EditProfileForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=3, max=150)])
     bio = TextAreaField('Bio', validators=[Length(max=500)])
+    phone = StringField('Phone Number', validators=[Length(max=20)])
+    address = TextAreaField('Address', validators=[Length(max=200)])
     submit = SubmitField('Save Changes')
