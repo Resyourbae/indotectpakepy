@@ -1,1 +1,22 @@
-<!-- Edit profile page template -->
+{% extends 'base.html' %}
+{% block title %}Edit Profile | Indotect{% endblock %}
+{% block content %}
+<div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
+    <h2 class="text-2xl font-bold text-center mb-2">Edit Profil</h2>
+    <form method="POST" action="{{ url_for('edit_profile') }}" class="space-y-4">
+        {{ form.hidden_tag() }}
+        <div>
+            <label for="username" class="block text-sm font-medium text-gray-900">Username</label>
+            {{ form.username(class_="mt-1 block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500") }}
+        </div>
+        <div>
+            <label for="bio" class="block text-sm font-medium text-gray-900">Bio</label>
+            {{ form.bio(class_="mt-1 block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500") }}
+        </div>
+        <button type="submit" class="w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold">Simpan Perubahan</button>
+    </form>
+    <div class="mt-4 text-center">
+        <a href="{{ url_for('profile') }}" class="text-indigo-600 hover:underline">Kembali ke Profil</a>
+    </div>
+</div>
+{% endblock %}

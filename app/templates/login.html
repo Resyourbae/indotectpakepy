@@ -1,1 +1,21 @@
-<!-- Login page template -->
+{% extends 'base.html' %}
+{% block title %}Login | Indotect{% endblock %}
+{% block content %}
+<div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
+    <h2 class="text-2xl font-bold text-center mb-2">Login</h2>
+    <p class="text-sm text-center text-gray-500 mb-4">Masukkan Email dan password Anda untuk masuk</p>
+    <form method="POST" action="{{ url_for('login') }}" class="space-y-4">
+        {{ form.hidden_tag() }}
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-900">Email</label>
+            {{ form.email(class_="mt-1 block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500", placeholder="Masukkan email Anda") }}
+        </div>
+        <div>
+            <label for="password" class="block text-sm font-medium text-gray-900">Password</label>
+            {{ form.password(class_="mt-1 block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500", placeholder="Masukkan password Anda") }}
+        </div>
+        <button type="submit" class="w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold">Login</button>
+    </form>
+    <p class="mt-4 text-center text-sm">Belum punya akun? <a href="{{ url_for('register') }}" class="text-indigo-600 hover:underline">Daftar disini</a></p>
+</div>
+{% endblock %}

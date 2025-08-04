@@ -1,11 +1,41 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{% block title %}Indotect{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
-    
+<body class="bg-gray-50 min-h-screen font-family">
+    <!-- Navbar Start -->
+    <nav class="bg-indigo-600 text-white py-3 shadow-md">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <a href="/" class="text-xl font-bold font-family">INDOTHECTSA</a>
+            <div class="space-x-4">
+                <a href="{{ url_for('login') }}" class="hover:underline">Login</a>
+                <a href="{{ url_for('register') }}" class="hover:underline">Register</a>
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('profile') }}" class="hover:underline">Profile</a>
+                    <a href="{{ url_for('edit_profile') }}" class="hover:underline">Edit Profile</a>
+                    <a href="{{ url_for('logout') }}" class="hover:underline">Logout</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+    <main class="container mx-auto py-8 px-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="mb-4 p-3 rounded-lg text-white {{ 'bg-red-600' if category=='danger' else 'bg-indigo-600' }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
 </body>
 </html>
