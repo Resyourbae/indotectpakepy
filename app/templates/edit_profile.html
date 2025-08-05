@@ -36,7 +36,7 @@
     <div class="flex-1 flex items-center justify-center">
         <div class="w-full max-w-md p-5 space-y-3 bg-white rounded-lg border">
             <h2 class="text-2xl text-center text-gray-800">Edit Profile</h2>
-            <form method="POST" action="{{ url_for('edit_profile') }}" class="space-y-4 outline outline-2 outline-black rounded-md p-2">
+            <form method="POST" action="{{ url_for('edit_profile') }}" class="space-y-4 rounded-md p-2">
                 {{ form.hidden_tag() }}
                 <div>
                     <label for="username" class="block text-sm font-medium text-gray-900">Username</label>
