@@ -12,7 +12,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        if user and user.check_password(form.password.data):
+        if user and user.verify_password(form.password.data):
             login_user(user)
             flash('Login berhasil!', 'success')
             next_page = request.args.get('next')
@@ -34,7 +34,7 @@ def register():
             return render_template('register.html', form=form)
         
         user = User(username=form.username.data, email=form.email.data)
-        user.set_password(form.password.data)
+        user.password = form.password.data  # This uses the property setter
         db.session.add(user)
         db.session.commit()
         flash('Akun berhasil dibuat! Silakan login.', 'success')

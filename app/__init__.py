@@ -21,9 +21,9 @@ login_manager.login_message_category = 'danger'
 from app import routes, models
 
 @login_manager.user_loader
-def load_user(user_id):
+def load_user(users_id):
     from app.models import User
-    return User.query.get(int(user_id))
+    return User.query.get(int(users_id))
 
 # Inisialisasi Flask-Migrate
 from flask_migrate import Migrate
