@@ -9,8 +9,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(150), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
     bio = db.Column(db.Text, default='')
-    phone = db.Column(db.String(20), nullable=True)
-    address = db.Column(db.Text, nullable=True)
+    phone = db.Column(db.String(20))
+    address = db.Column(db.String(255))
 
     @property
     def password(self):

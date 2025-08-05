@@ -1,8 +1,8 @@
-"""Add phone and address fields
+"""empty message
 
-Revision ID: 8f315edbd2db
+Revision ID: 3580a219846a
 Revises: 
-Create Date: 2025-08-04 15:06:19.255996
+Create Date: 2025-08-05 09:39:38.516677
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '8f315edbd2db'
+revision = '3580a219846a'
 down_revision = None
 branch_labels = None
 depends_on = None

@@ -13,7 +13,6 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and user.verify_password(form.password.data):
-        if user and user.verify_password(form.password.data):
             login_user(user)
             flash('Login berhasil!', 'success')
             next_page = request.args.get('next')
