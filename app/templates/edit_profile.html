@@ -46,6 +46,14 @@
                     <label for="bio" class="block text-sm font-medium text-gray-900">Bio</label>
                     {{ form.bio(class_="mt-1 block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black", placeholder="Tulis bio Anda") }}
                 </div>
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-900">Nomor Telepon</label>
+                    {{ form.phone(class_="mt-1 block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black", placeholder="Masukkan nomor telepon") }}
+                </div>
+                <div>
+                    <label for="address" class="block text-sm font-medium text-gray-900">Alamat</label>
+                    {{ form.address(class_="mt-1 block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black", placeholder="Masukkan alamat") }}
+                </div>
                 <div class="flex justify-between space-x-4">
                     <a href="{{ url_for('profile') }}" class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 text-center w-1/2">Kembali</a>
                     <button type="submit" class="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 w-1/2">Simpan Perubahan</button>

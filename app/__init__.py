@@ -18,8 +18,6 @@ login_manager.login_view = 'login'
 login_manager.login_message = 'Silakan login untuk mengakses halaman ini.'
 login_manager.login_message_category = 'danger'
 
-from app import routes, models
-
 @login_manager.user_loader
 def load_user(users_id):
     from app.models import User
@@ -30,4 +28,4 @@ from flask_migrate import Migrate
 migrate = Migrate(app, db)
 
 # Import routes setelah semua konfigurasi
-from app import routes
+from app import routes, models

@@ -13,6 +13,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and user.verify_password(form.password.data):
+        if user and user.verify_password(form.password.data):
             login_user(user)
             flash('Login berhasil!', 'success')
             next_page = request.args.get('next')
@@ -44,6 +45,8 @@ def register():
 @app.route('/profile')
 @login_required
 def profile():
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
     return render_template('profile.html', user=current_user)
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
@@ -56,12 +59,16 @@ def edit_profile():
             return render_template('edit_profile.html', form=form)
         current_user.username = form.username.data
         current_user.bio = form.bio.data
+        current_user.phone = form.phone.data
+        current_user.address = form.address.data
         db.session.commit()
         flash('Profil berhasil diupdate!', 'success')
         return redirect(url_for('profile'))
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.bio.data = current_user.bio
+        form.phone.data = current_user.phone
+        form.address.data = current_user.address
     return render_template('edit_profile.html', form=form)
 
 @app.route('/logout')
