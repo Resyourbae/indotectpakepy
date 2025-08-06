@@ -29,3 +29,4 @@ migrate = Migrate(app, db)
 
 # Import routes setelah semua konfigurasi
 from app import routes, models
+
