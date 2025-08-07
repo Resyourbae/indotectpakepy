@@ -10,15 +10,172 @@ body {
 .rounded-lg {
     border-radius: 0.75rem;
 }
-.bg-indigo-600 {
-    background-color: #4f46e5;
+
+/* SweetAlert-like Modal Styles */
+.swal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    animation: swal-fadeIn 0.3s ease-in forwards;
 }
-.bg-indigo-700 {
-    background-color: #4338ca;
+
+.swal-modal {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    position: relative;
+    width: 32rem;
+    max-width: 90%;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    transform: scale(0.7);
+    opacity: 0;
+    animation: swal-popIn 0.3s ease-out 0.1s forwards;
 }
-.bg-red-600 {
-    background-color: #dc2626;
+
+.swal-icon {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    background: #4ade80;
+    transform: scale(0);
+    animation: swal-iconScale 0.3s ease-out 0.2s forwards;
 }
-.bg-red-700 {
-    background-color: #b91c1c;
+
+.swal-icon::before,
+.swal-icon::after {
+    content: '';
+    position: absolute;
+    background: white;
+}
+
+.swal-icon::before {
+    width: 28px;
+    height: 6px;
+    left: 24px;
+    top: 40px;
+    transform: rotate(45deg);
+    transform-origin: 100% 50%;
+    animation: swal-checkLeft 0.3s ease-out 0.5s forwards;
+    opacity: 0;
+}
+
+.swal-icon::after {
+    width: 47px;
+    height: 6px;
+    right: 16px;
+    top: 35px;
+    transform: rotate(-45deg);
+    transform-origin: 0 50%;
+    animation: swal-checkRight 0.3s ease-out 0.7s forwards;
+    opacity: 0;
+}
+
+.swal-title {
+    color: #1f2937;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: swal-fadeInUp 0.3s ease-out 0.3s forwards;
+}
+
+.swal-text {
+    color: #6b7280;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: swal-fadeInUp 0.3s ease-out 0.4s forwards;
+}
+
+/* Animations */
+@keyframes swal-fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes swal-popIn {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes swal-iconScale {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+}
+
+@keyframes swal-checkLeft {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 28px;
+        opacity: 1;
+    }
+}
+
+@keyframes swal-checkRight {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 47px;
+        opacity: 1;
+    }
+}
+
+@keyframes swal-fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Close animations */
+.swal-overlay.swal-closing {
+    animation: swal-fadeOut 0.3s ease-in forwards;
+}
+
+.swal-overlay.swal-closing .swal-modal {
+    animation: swal-popOut 0.3s ease-in forwards;
+}
+
+@keyframes swal-fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes swal-popOut {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(0.9);
+        opacity: 0;
+    }
 }

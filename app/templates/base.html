@@ -1,21 +1,46 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Indotect{% endblock %}</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            light: '#4f46e5',
+                            dark: '#6366f1'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='darkmode.js') }}" defer></script>
 </head>
-<body class="bg-gray-50 min-h-screen font-family">
+<body class="min-h-screen font-family transition-colors duration-200 bg-gray-50 dark:bg-gray-900">
     <!-- Navbar Start -->
-    <nav class="bg-black text-white py-3 shadow-md">
+    <nav class="bg-black text-white py-3 shadow-md dark:bg-gray-800">
         <div class="container mx-auto flex justify-between items-center px-4">
             <a href="/" class="text-xl font-medium pl-4 py-1 font-family">INDOTHECTSA</a>
             <div class="flex items-center space-x-4 pr-9">
-                <span class="text-sm text-gray-100">Hallo, {{ current_user.username }}</span>
-                <a href="{{ url_for('logout') }}" class="border border-gray-100 rounded-md px-3 py-1 text-sm font-family font-medium hover:bg-gray-700">Logout</a>
+                <!-- Dark Mode Toggle -->
+                <button onclick="toggleDarkMode()" class="p-2 rounded-lg bg-gray-800 dark:bg-gray-700 text-yellow-300 dark:text-gray-300 hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors duration-200">
+                    <svg class="w-5 h-5 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/>
+                    </svg>
+                    <svg class="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                    </svg>
+                </button>
+                <span class="text-sm text-gray-100 dark:text-gray-300">Hallo, {{ current_user.username }}</span>
+                <a href="{{ url_for('logout') }}" class="border border-gray-100 dark:border-gray-600 rounded-md px-3 py-1 text-sm font-family font-medium hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors duration-200">Logout</a>
                 <!-- {% if current_user.is_authenticated %}
                     <a href="{{ url_for('profile') }}" class="hover:underline">Profile</a>
                     <a href="{{ url_for('edit_profile') }}" class="hover:underline">Edit Profile</a>
@@ -37,5 +62,13 @@
         {% endwith %}
         {% block content %}{% endblock %}
     </main>
+    <style>
+        /* Dark mode transitions */
+        .transition-colors {
+            transition-property: background-color, border-color, color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 200ms;
+        }
+    </style>
 </body>
 </html>

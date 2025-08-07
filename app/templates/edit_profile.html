@@ -1,65 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Profile</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-white min-h-screen flex flex-col">
-    <!-- Navbar Start -->
-    <nav class="bg-black text-white py-3 shadow-md">
-        <div class="container mx-auto flex justify-between items-center px-4">
-            <a href="/" class="text-xl font-medium pl-4 py-1 font-family">INDOTHECTSA</a>
-            <!-- <div class="space-x-4">
-                <a href="{{ url_for('profile') }}" class="hover:underline">Profile</a>
-                <a href="{{ url_for('edit_profile') }}" class="hover:underline">Edit Profile</a>
-                <a href="{{ url_for('logout') }}" class="hover:underline">Logout</a>
-            </div> -->
-        </div>
-    </nav>
-    <!-- Navbar End -->
-
-    <!-- Flash Messages -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div class="container mx-auto mt-4 px-4">
-                    <div class="p-3 rounded-lg text-white {{ 'bg-red-600' if category=='danger' else 'bg-green-600' }}">
-                        {{ message }}
-                    </div>
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
+{% extends 'base.html' %}
+{% block title %}Edit Profile | Indotect{% endblock %}
+{% block content %}
 
     <div class="flex-1 flex items-center justify-center">
-        <div class="w-full max-w-md p-5 space-y-3 bg-white rounded-lg border">
-            <h2 class="text-2xl text-center text-gray-800">Edit Profile</h2>
+        <div class="w-full max-w-md p-5 space-y-3 bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700 transition-colors duration-200">
+            <h2 class="text-2xl text-center text-gray-800 dark:text-white transition-colors duration-200">Edit Profile</h2>
             <form method="POST" action="{{ url_for('edit_profile') }}" class="space-y-4 rounded-md p-2">
                 {{ form.hidden_tag() }}
                 <div>
-                    <label for="username" class="block text-sm font-medium text-gray-900">Username</label>
-                    {{ form.username(class_="mt-1 block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black", placeholder="Masukkan username baru") }}
+                    <label for="username" class="block text-sm font-medium text-gray-900 dark:text-gray-200 transition-colors duration-200">Username</label>
+                    {{ form.username(class_="mt-1 block w-full px-3 py-1 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-black dark:focus:ring-gray-500 focus:border-black dark:focus:border-gray-500 text-gray-900 dark:text-white transition-colors duration-200", placeholder="Masukkan username baru") }}
                 </div>
                 <div>
-                    <label for="bio" class="block text-sm font-medium text-gray-900">Bio</label>
-                    {{ form.bio(class_="mt-1 block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black", placeholder="Tulis bio Anda") }}
+                    <label for="bio" class="block text-sm font-medium text-gray-900 dark:text-gray-200 transition-colors duration-200">Bio</label>
+                    {{ form.bio(class_="mt-1 block w-full px-3 py-1 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-black dark:focus:ring-gray-500 focus:border-black dark:focus:border-gray-500 text-gray-900 dark:text-white transition-colors duration-200", placeholder="Tulis bio Anda") }}
                 </div>
                 <div>
-                    <label for="phone" class="block text-sm font-medium text-gray-900">Nomor Telepon</label>
-                    {{ form.phone(class_="mt-1 block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black", placeholder="Masukkan nomor telepon") }}
+                    <label for="phone" class="block text-sm font-medium text-gray-900 dark:text-gray-200 transition-colors duration-200">Nomor Telepon</label>
+                    {{ form.phone(class_="mt-1 block w-full px-3 py-1 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-black dark:focus:ring-gray-500 focus:border-black dark:focus:border-gray-500 text-gray-900 dark:text-white transition-colors duration-200", placeholder="Masukkan nomor telepon") }}
                 </div>
                 <div>
-                    <label for="address" class="block text-sm font-medium text-gray-900">Alamat</label>
-                    {{ form.address(class_="mt-1 block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black", placeholder="Masukkan alamat") }}
+                    <label for="address" class="block text-sm font-medium text-gray-900 dark:text-gray-200 transition-colors duration-200">Alamat</label>
+                    {{ form.address(class_="mt-1 block w-full px-3 py-1 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-black dark:focus:ring-gray-500 focus:border-black dark:focus:border-gray-500 text-gray-900 dark:text-white transition-colors duration-200", placeholder="Masukkan alamat") }}
                 </div>
                 <div class="flex justify-between space-x-4">
-                    <a href="{{ url_for('profile') }}" class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 text-center w-1/2">Kembali</a>
-                    <button type="submit" class="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 w-1/2">Simpan Perubahan</button>
+                    <a href="{{ url_for('profile') }}" class="px-4 py-2 bg-gray-600 dark:bg-gray-700 text-white rounded-md hover:bg-gray-700 dark:hover:bg-gray-600 text-center w-1/2 transition-colors duration-200">Kembali</a>
+                    <button type="submit" class="px-4 py-2 bg-black dark:bg-gray-900 text-white rounded-md hover:bg-gray-800 dark:hover:bg-gray-800 w-1/2 transition-colors duration-200">Simpan Perubahan</button>
                 </div>
             </form>
         </div>
     </div>
-</body>
-</html>
+{% endblock %}
