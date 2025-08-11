@@ -56,14 +56,40 @@
                 <div>
                     <label for="username" class="block text-sm font-medium text-gray-900">Username</label>
                     {{ form.username(class_="mt-1 block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black", placeholder="Masukkan username Anda") }}
+                    {% if form.username.errors %}
+                        {% for error in form.username.errors %}
+                            <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
                 </div>
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-900">Email</label>
-                    {{ form.email(class_="mt-1 block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black", placeholder="Masukkan email Anda") }}
+                    {{ form.email(class_="mt-1 block w-full px-3 py-1 border rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black " ~ ('border-red-500' if form.email.errors else 'border-gray-300'), placeholder="contoh@email.com") }}
+                    {% if form.email.errors %}
+                        {% for error in form.email.errors %}
+                            <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                    <p class="mt-1 text-xs text-gray-500">Gunakan email yang valid (contoh: nama@domain.com)</p>
                 </div>
                 <div>
                     <label for="password" class="block text-sm font-medium text-gray-900">Password</label>
-                    {{ form.password(class_="mt-1 block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black", placeholder="Masukkan password Anda") }}
+                    {{ form.password(class_="mt-1 block w-full px-3 py-1 border rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black " ~ ('border-red-500' if form.password.errors else 'border-gray-300'), placeholder="Masukkan password yang kuat") }}
+                    {% if form.password.errors %}
+                        {% for error in form.password.errors %}
+                            <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                    <div class="mt-2 text-xs text-gray-500">
+                        <p>Password harus memenuhi kriteria berikut:</p>
+                        <ul class="list-disc pl-5 space-y-1 mt-1">
+                            <li>Minimal 8 karakter</li>
+                            <li>Minimal 1 huruf kapital</li>
+                            <li>Minimal 1 huruf kecil</li>
+                            <li>Minimal 1 angka</li>
+                            <li>Minimal 1 karakter spesial (!@#$%^&*(),.?":{}|<>)</li>
+                        </ul>
+                    </div>
                 </div>
                 <button type="submit" class="w-full py-2 px-4 bg-black text-white font-semibold text-sm rounded-md hover:bg-gray-800">Register</button>
             </form>
