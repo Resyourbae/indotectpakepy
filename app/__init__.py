@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy          # Untuk ORM (Object Relational 
 from flask_login import LoginManager             # Untuk manajemen login (autentikasi pengguna)
 from config import Config                        # Konfigurasi aplikasi dari file config.py
 import os                                        # Modul os digunakan untuk operasi sistem (tidak digunakan langsung di sini)
+from flask_bcrypt import Bcrypt
 
 # Inisialisasi aplikasi Flask
 app = Flask(__name__)                            # Membuat instance dari aplikasi Flask
@@ -17,6 +18,7 @@ login_manager = LoginManager(app)                # Membuat instance LoginManager
 login_manager.login_view = 'login'               # Nama endpoint view untuk login, akan digunakan saat redirect otomatis saat belum login
 login_manager.login_message = 'Silakan login untuk mengakses halaman ini.'  # Pesan yang ditampilkan jika pengguna belum login
 login_manager.login_message_category = 'danger'  # Kategori pesan (bisa digunakan untuk styling seperti Bootstrap alert)
+bcrypt = Bcrypt(app)
 
 # Fungsi untuk memuat pengguna berdasarkan ID (diperlukan oleh Flask-Login)
 @login_manager.user_loader

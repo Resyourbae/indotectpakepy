@@ -1,4 +1,4 @@
-from app import db
+from app import db, bcrypt
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -11,13 +11,19 @@ class User(db.Model, UserMixin):
     phone = db.Column(db.String(20))
     address = db.Column(db.String(255))
 
+from app import db, bcrypt
+from flask_login import UserMixin
+
+class User(db.Model, UserMixin):
+    # ...existing fields...
+
     @property
     def password(self):
         raise AttributeError('password is not a readable attribute')
 
     @password.setter
     def password(self, password):
-        self.password_hash = generate_password_hash(password)
+        self.password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
 
     def verify_password(self, password):
-        return check_password_hash(self.password_hash, password)
+        return bcrypt.check_password_hash(self.password_hash, password)

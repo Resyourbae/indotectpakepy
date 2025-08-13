@@ -5,3 +5,4 @@ flask-wtf
 email-validator
 flask-migrate
 psycopg2-binary
+flask-bcrypt
